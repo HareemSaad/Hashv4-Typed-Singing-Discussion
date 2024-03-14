@@ -1,0 +1,5 @@
+PK="" #0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 publicly known privatekeys
+RPC_URL=''
+ETHERSCAN_API_KEY=''
+
+## same as root .env

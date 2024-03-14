@@ -6,12 +6,14 @@ import {Signer, IERC20} from "../src/Signing.sol";
 
 contract SigningTest is Test {
     Signer public signer;
-    IERC20 token = IERC20(address(4));
+    IERC20 token = IERC20(0x779877A7B0D9E8603169DdbD7836e478b4624789);
     uint256 operatorPrivateKey = vm.envUint("PK"); 
     address operator = vm.addr(operatorPrivateKey);
 
     function setUp() public {
-        signer = new Signer();
+        // signer = new Signer();
+        vm.createSelectFork(vm.envString("RPC_URL"));
+        signer = Signer(0xb6CF871dA4b22969fA1C63Bd42486BEEE3EeA3C2);
     }
 
     function test_Sign() public {
@@ -21,6 +23,9 @@ contract SigningTest is Test {
             token,
             1e18
         );
+
+        console.log("\ndomain: ");
+        console.logBytes32(signer.DOMAIN_SEPARATOR());
 
         bytes32 _hash = signer.hash(claim);
 

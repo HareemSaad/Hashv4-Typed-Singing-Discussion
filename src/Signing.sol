@@ -22,6 +22,10 @@ contract Signer is EIP712{
     ) EIP712("TEST", "v1") {
     }
 
+    function DOMAIN_SEPARATOR() public view returns (bytes32) {
+        return _domainSeparatorV4();
+    }
+
     function hash(Claim calldata claim) public pure returns (bytes32) {
         return (
             keccak256(

@@ -84,11 +84,23 @@ export const abi = [
     name: "verifySignature",
     inputs: [
       { name: "sender", type: "address", internalType: "address" },
-      { name: "typedHash", type: "bytes32", internalType: "bytes32" },
+      {
+        name: "claim",
+        type: "tuple",
+        internalType: "struct Signer.Claim",
+        components: [
+          {
+            name: "token",
+            type: "address",
+            internalType: "contract IERC20",
+          },
+          { name: "amount", type: "uint256", internalType: "uint256" },
+        ],
+      },
       { name: "signature", type: "bytes", internalType: "bytes" },
     ],
     outputs: [{ name: "", type: "bool", internalType: "bool" }],
-    stateMutability: "pure",
+    stateMutability: "view",
   },
   {
     type: "event",

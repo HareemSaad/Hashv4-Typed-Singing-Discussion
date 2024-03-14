@@ -13,7 +13,7 @@ contract SigningTest is Test {
     function setUp() public {
         // signer = new Signer();
         vm.createSelectFork(vm.envString("RPC_URL"));
-        signer = Signer(0xb6CF871dA4b22969fA1C63Bd42486BEEE3EeA3C2);
+        signer = Signer(0xA75547A78F27642216525B6edac07452ec2A88f3);
     }
 
     function test_Sign() public {
@@ -43,7 +43,7 @@ contract SigningTest is Test {
         console.log("\nsign: ");
         console.logBytes(sign);
 
-        assert(signer.verifySignature(operator, typedHash, sign) == true);
+        assert(signer.verifySignature(operator, claim, sign) == true);
         
         vm.stopPrank();
     }

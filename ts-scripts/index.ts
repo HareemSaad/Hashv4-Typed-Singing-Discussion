@@ -1,10 +1,10 @@
 import "dotenv/config";
-import { Contract, JsonRpcProvider, Wallet } from "ethers";
+import { Contract, JsonRpcProvider, Wallet, assert } from "ethers";
 import { abi } from "./abi/abi";
 
 const provider = new JsonRpcProvider(process.env.RPC_URL);
 const wallet = new Wallet(process.env.PK as string, provider);
-const contract_address = "0xb6CF871dA4b22969fA1C63Bd42486BEEE3EeA3C2"
+const contract_address = "0xA75547A78F27642216525B6edac07452ec2A88f3"
 const contract = new Contract(
     contract_address,
     abi,
@@ -35,5 +35,13 @@ const contract = new Contract(
     const sig = await wallet.signTypedData(domain, types, claim);
 
     console.log(sig);
+
+    const result = await contract.verifySignature(
+        wallet.address,
+        claim,
+        sig
+    );
+
+    console.log(result)
 
 })();

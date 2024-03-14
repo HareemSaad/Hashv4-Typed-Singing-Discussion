@@ -46,11 +46,11 @@ contract Signer is EIP712{
 
     function verifySignature(
         address sender,
-        bytes32 typedHash,
+        Claim calldata claim,
         bytes memory signature
-    ) public pure returns (bool) {
+    ) public view returns (bool) {
 
-        address signer = ECDSA.recover(typedHash, signature);
+        address signer = ECDSA.recover(getTypedHash(claim), signature);
         return signer == sender;
         
     }
